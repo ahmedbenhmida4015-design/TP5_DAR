@@ -63,11 +63,8 @@ TP5/
 │       │   ├── java/rmiClient/BanqueClient.java
 │       │   └── resources/jndi.properties
 │       └── pom.xml
-├── captures/
 └── README.md
 ```
-
-> **Captures d'écran :** les images référencées dans ce document sont des emplacements à compléter. Après exécution, placez vos captures dans le dossier `captures/` avec les noms indiqués.
 
 ## 4. Principe général de RMI
 
@@ -106,8 +103,6 @@ Le serveur offre aux clients un service distant qui convertit un montant en **eu
 ### Étape 1 — Préparation de l'espace de travail
 
 Création du répertoire `votreNomPrenom_LSI3_DevAppReparties`.
-
-![Espace de travail](captures/5-1_etape1_workspace.png)
 
 ### Étape 2 — Développement du serveur (`RMIConversion_Server`)
 
@@ -174,17 +169,11 @@ public class ConversionServer {
 }
 ```
 
-![Projet serveur](captures/5-1_etape2_serveur.png)
-
 ### Étape 3 — Développement du client (`RMIConversion_Client`)
 
 1. Création du projet `RMIConversion_Client`.
 2. Export du package `rmiService` du projet serveur **en sélectionnant uniquement `IConversion`** (sans `ConversionImpl`) dans le fichier `conversionClient.jar`.
 3. Ajout du `.jar` au classpath du projet client.
-
-![Export du JAR](captures/5-1_etape3_export_jar.png)
-
-![Ajout du JAR au classpath](captures/5-1_etape3_classpath.png)
 
 **Application client `ConversionClient`** (package `rmiClient`) :
 
@@ -217,14 +206,6 @@ public class ConversionClient {
 1. Lancer d'abord `ConversionServer`.
 2. Lancer ensuite `ConversionClient`.
 
-**Serveur démarré :**
-
-![Serveur de conversion démarré](captures/5-1_etape4_serveur.png)
-
-**Résultat côté client :**
-
-![Résultat de la conversion](captures/5-1_etape4_client.png)
-
 Résultat attendu pour `convertirMontant(500)` avec un taux de 3 : `1500.0`.
 
 **Résultat d'exécution (console) :**
@@ -248,7 +229,6 @@ Client lancé alors que le serveur est arrêté :
 java.rmi.ConnectException: Connection refused to host: localhost; nested exception is:
 	java.net.ConnectException: Connection refused
 ```
-
 
 ## 7. Tests — Activité 5-1
 
@@ -280,7 +260,7 @@ Une application répartie gère des comptes bancaires. Un compte est défini par
 
 ### Étape 1 — Préparation de l'espace de travail
 
-![Espace de travail](captures/5-2_etape1_workspace.png)
+Création du répertoire de travail et des projets `RMIBanque_Server` et `RMIBanque_Client`.
 
 ### Étape 2 — Développement du serveur (`RMIBanque_Server`)
 
@@ -376,8 +356,6 @@ public class BanqueImpl extends UnicastRemoteObject implements IBanque {
 
 Les comptes sont stockés dans une `HashMap<Integer, Compte>` dont la clé est le code du compte, ce qui permet de vérifier l'unicité du code avec `containsKey()`.
 
-![Projet serveur Banque](captures/5-2_etape2_serveur.png)
-
 ### Étape 3 — Développement du client (`RMIBanque_Client`)
 
 1. Création du projet `RMIBanque_Client`.
@@ -403,10 +381,6 @@ Les comptes sont stockés dans une `HashMap<Integer, Compte>` dont la clé est l
     <classifier>api</classifier>
 </dependency>
 ```
-
-![Génération du JAR](captures/5-2_etape3_jar.png)
-
-![Dépendance du client](captures/5-2_etape3_classpath.png)
 
 **Client `BanqueClient`** (version avec le registre RMI, étapes 3 et 4) :
 
@@ -464,14 +438,6 @@ public class BanqueServer {
 
 1. Démarrer le serveur RMI (`BanqueServer`).
 2. Lancer le client (`BanqueClient`).
-
-**Serveur démarré :**
-
-![Serveur Banque démarré](captures/5-2_etape4_serveur.png)
-
-**Création et consultation d'un compte (client) :**
-
-![Résultat du client](captures/5-2_etape4_client.png)
 
 **Résultat d'exécution (console) :**
 
@@ -570,18 +536,6 @@ public class BanqueClient {
     }
 }
 ```
-
-![Fichier jndi.properties](captures/5-2_etape5_jndi_properties.png)
-
-![BanqueServer avec JNDI](captures/5-2_etape5_serveur_jndi.png)
-
-![BanqueClient avec JNDI](captures/5-2_etape5_client_jndi.png)
-
-**Relance de l'application avec JNDI :**
-
-![Exécution serveur JNDI](captures/5-2_etape5_run_serveur.png)
-
-![Exécution client JNDI](captures/5-2_etape5_run_client.png)
 
 **Résultat d'exécution avec JNDI (console) :**
 
